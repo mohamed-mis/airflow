@@ -239,8 +239,10 @@ class CustomObjectLauncher(LoggingMixin):
     def get_body(self):
         self.body: dict = SparkJobSpec(**self.template_body["spark"])
         # self.body.metadata = {"name": self.name, "namespace": self.namespace}
-        self.body.metadata["name"] = self.name
-        self.body.metadata["namespace"] = self.namespace
+        self.body.metadata.name = self.name
+        self.body.metadata.namespace = self.namespace
+        # self.body.metadata["name"] = self.name
+        # self.body.metadata["namespace"] = self.namespace
         if self.template_body.get("kubernetes"):
             k8s_spec: dict = KubernetesSpec(**self.template_body["kubernetes"])
             self.body.spec["volumes"] = k8s_spec.volumes
